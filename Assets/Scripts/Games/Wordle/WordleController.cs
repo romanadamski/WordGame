@@ -1,9 +1,6 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public enum GuessType
@@ -36,22 +33,17 @@ public class WordleController : BaseGameController
     [SerializeField]
     private KeyboardController keyboardController;
     
-    [SerializeField]
-    private TextMeshProUGUI warningText;
-    
-    [SerializeField]
-    private GameObject warningTextParent;
-    
     private List<string> guesses;
     private List<string> answers;
 
     private string wordToAnswer = string.Empty;
-    private char[] wordGuess = new char[5];
+    private char[] wordGuess = new char[MAX_LETTERS];
 
     private int currentIndex = 0;
     private int currentTry = 0;
 
-    private Coroutine warningCoroutine;
+    private const int MAX_TRIES = 6;
+    private const int MAX_LETTERS = 5;
 
     public override void LoadGame()
     {
@@ -62,7 +54,7 @@ public class WordleController : BaseGameController
         warningText.text = string.Empty;
 
         eventChannelSO.OnKeyClick.AddListener(OnKeyClick);
-        wordGuess = new char[5];;
+        wordGuess = new char[MAX_LETTERS];;
         GetWordToGuess();
         currentIndex = 0;
         currentTry = 0;
@@ -108,7 +100,7 @@ public class WordleController : BaseGameController
     private void TrySubmitWord()
     {
         var word = new string(wordGuess);
-        if (currentIndex < 5)
+        if (currentIndex < MAX_LETTERS)
         {
             ShowWarningMessage("Not enough letters");
         }
@@ -123,10 +115,10 @@ public class WordleController : BaseGameController
             ShowWarningMessage("Win!");
             eventChannelSO.OnGameEnd?.Invoke(true, wordToAnswer);
         }
-        else if (currentTry < 6)
+        else if (currentTry < MAX_TRIES)
         {
             HandleColors();
-            if (currentTry >= 6)
+            if (currentTry >= MAX_TRIES)
             {
                 ShowWarningMessage("Lose");
                 eventChannelSO.OnGameEnd?.Invoke(false, wordToAnswer);
@@ -152,7 +144,6 @@ public class WordleController : BaseGameController
         return letterCount;
     }
 
-    //todo
     private void HandleColors()
     {
         var letterCount = GetLetterCount();
@@ -209,24 +200,7 @@ public class WordleController : BaseGameController
         keyboardController.SetColors(guess);
         currentTry++;
         currentIndex = 0;
-        wordGuess = new char[5];
-    }
-
-    private void ShowWarningMessage(string message)
-    {
-        if (warningCoroutine != null)
-        {
-            StopCoroutine(warningCoroutine);
-        }
-        warningCoroutine = StartCoroutine(ShowWarningMessageCoroutine(message));
-    }
-
-    private IEnumerator ShowWarningMessageCoroutine(string message)
-    {
-        warningTextParent.SetActive(true);
-        warningText.text = message;
-        yield return new WaitForSeconds(1.5f);
-        warningTextParent.SetActive(false);
+        wordGuess = new char[MAX_LETTERS];
     }
 
     private void RemoveCharacter()
@@ -241,7 +215,7 @@ public class WordleController : BaseGameController
 
     private void AddCharacter(char character)
     {
-        if (currentIndex < 5 && currentTry < 6)
+        if (currentIndex < MAX_LETTERS && currentTry < MAX_TRIES)
         {
             wordGuess[currentIndex] = character;
             guessPanelController.ShowLetter(currentTry, currentIndex, character);
