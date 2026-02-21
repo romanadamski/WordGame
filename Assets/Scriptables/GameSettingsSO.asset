@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa29443d6bedaf449831e158ea4b75e0, type: 3}
+  m_Name: GameSettingsSO
+  m_EditorClassIdentifier: 
+  <PolishLanguage>k__BackingField:
+    <Language>k__BackingField: 0
+    <Answers>k__BackingField: {fileID: 4900000, guid: 8e26e8a6fdb2a82468dcea9332fd44f5, type: 3}
+    <Guesses>k__BackingField: {fileID: 4900000, guid: 59629579e04c5944b8128cbf120a70f8, type: 3}
+  <EnglishLanguage>k__BackingField:
+    <Language>k__BackingField: 1
+    <Answers>k__BackingField: {fileID: 4900000, guid: 2b6ce49b07231cf47b759129c2f7e08f, type: 3}
+    <Guesses>k__BackingField: {fileID: 4900000, guid: afa90d24ce890d248a08d48f41d59fbf, type: 3}
+  <DefaultLanguage>k__BackingField: 1
+  <GoodColor1>k__BackingField: {r: 0.53333336, g: 0.5764706, b: 0.17254902, a: 1}
+  <GoodColor2>k__BackingField: {r: 0.11828877, g: 0.5188679, b: 0.11503203, a: 1}
+  <WrongColor>k__BackingField: {r: 0.24528301, g: 0.24528301, b: 0.24528301, a: 1}
