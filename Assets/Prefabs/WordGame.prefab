@@ -490,6 +490,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1497036068578947030}
     - target: {fileID: 9094761771677263898, guid: d042ebb1dbcd7444382dc89dcc2af262, type: 3}
+      propertyPath: eventChannelSO
+      value: 
+      objectReference: {fileID: 11400000, guid: 358ddce160852ab46b0316ac9f34fd27, type: 2}
+    - target: {fileID: 9094761771677263898, guid: d042ebb1dbcd7444382dc89dcc2af262, type: 3}
       propertyPath: gameController
       value: 
       objectReference: {fileID: 407594788832959305}
