@@ -24,11 +24,14 @@ public class DictionarleController : BaseGameController
     private DictionarleGuessesCounter guessCounter;
     
     [SerializeField]
-    private Transform guessPanel;
+    private Transform guessesBefore;
+    
+    [SerializeField]
+    private Transform guessesAfter;
 
     private List<string> guesses;
     private List<string> answers;
-
+    //todo dict for dictionarle, proper dict for pl wordle
     private string wordToAnswer = string.Empty;
     private string wordGuess = string.Empty;
 
@@ -132,12 +135,14 @@ public class DictionarleController : BaseGameController
     private void ReactivateInputField()
     {
         inputField.ActivateInputField();
+        inputField.Select();
 
         StartCoroutine(MoveTextEnd_NextFrame());
     }
 
     IEnumerator MoveTextEnd_NextFrame()
     {
+        yield return null;
         yield return null;
         inputField.MoveTextEnd(false);
     }
@@ -158,7 +163,7 @@ public class DictionarleController : BaseGameController
         }
         else
         {
-            var guessText = Instantiate(guessPrefab, guessPanel);
+            var guessText = Instantiate(guessPrefab, stringComparer.Compare(wordGuess, wordToAnswer) < 0 ? guessesBefore : guessesAfter);
             int i = 0;
             for (i = 0; i < wordGuess.Length; i++)
             {

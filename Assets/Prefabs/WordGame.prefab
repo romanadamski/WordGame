@@ -336,7 +336,8 @@ MonoBehaviour:
   guessPrefab: {fileID: 4579267082866786594, guid: 79d170b0ca7f6f340a63e8002c3c4e93, type: 3}
   inputField: {fileID: 8886493292396014568}
   guessCounter: {fileID: 6929022137150261197}
-  guessPanel: {fileID: 4452570634744962956}
+  guessesBefore: {fileID: 4452570634744962956}
+  guessesAfter: {fileID: 3024048738933662320}
 --- !u!1 &8772791183459156416
 GameObject:
   m_ObjectHideFlags: 0
@@ -730,26 +731,6 @@ PrefabInstance:
     - target: {fileID: 2267974897382809587, guid: 872a71c96fb4cab42bcb536148f7fb01, type: 3}
       propertyPath: m_IsActive
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2407202676508418585, guid: 872a71c96fb4cab42bcb536148f7fb01, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2407202676508418585, guid: 872a71c96fb4cab42bcb536148f7fb01, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2407202676508418585, guid: 872a71c96fb4cab42bcb536148f7fb01, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 890.52155
-      objectReference: {fileID: 0}
-    - target: {fileID: 2407202676508418585, guid: 872a71c96fb4cab42bcb536148f7fb01, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 495.26077
-      objectReference: {fileID: 0}
-    - target: {fileID: 2407202676508418585, guid: 872a71c96fb4cab42bcb536148f7fb01, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -680.3689
       objectReference: {fileID: 0}
     - target: {fileID: 2423875121768992835, guid: 872a71c96fb4cab42bcb536148f7fb01, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1519,6 +1500,11 @@ MonoBehaviour:
 --- !u!224 &2176006692507096497 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3719557381240506982, guid: 872a71c96fb4cab42bcb536148f7fb01, type: 3}
+  m_PrefabInstance: {fileID: 3291074928346390487}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &3024048738933662320 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 314033146802486695, guid: 872a71c96fb4cab42bcb536148f7fb01, type: 3}
   m_PrefabInstance: {fileID: 3291074928346390487}
   m_PrefabAsset: {fileID: 0}
 --- !u!224 &4452570634744962956 stripped
