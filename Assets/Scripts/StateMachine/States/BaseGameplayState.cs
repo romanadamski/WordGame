@@ -14,6 +14,9 @@ public class BaseGameplayState : StateWithMenu<GameplayMenu>
     [SerializeField]
     private BaseGameController gameController;
     
+    [SerializeField]
+    private float gameEndPopupDelay = 0f;
+    
     protected override void OnEnter()
     {
         base.OnEnter();
@@ -33,8 +36,8 @@ public class BaseGameplayState : StateWithMenu<GameplayMenu>
     private void OnGameEnd(bool isWin, string answer)
     {
         var title = isWin ? "You've won!" : "You've lost!";
-        var message = $"The word was: {answer}\nPlay again?";
-        confirmationPopup.Show(title, message, ReinitState, GoToMainMenu);
+        var message = $"The word was: {answer.ToUpper()}\nPlay again?";
+        confirmationPopup.Show(title, message, ReinitState, GoToMainMenu, gameEndPopupDelay);
     }
 
     protected void OnCloseClick()

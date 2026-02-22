@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-public class DictionarleGuessController : MonoBehaviour
+public class DictionarleGuessLabel : MonoBehaviour
 {
     [field: SerializeField]
     public TextMeshProUGUI GuessLabel {  get; private set; }

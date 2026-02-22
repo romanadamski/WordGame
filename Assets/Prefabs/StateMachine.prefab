@@ -93,9 +93,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   menu: {fileID: 0}
   gameStateSO: {fileID: 11400000, guid: cda5ef8cc9d470749b6c3442093d2a65, type: 2}
+  eventChannelSO: {fileID: 0}
   confirmationPopup: {fileID: 0}
   gameController: {fileID: 0}
-  keyboardController: {fileID: 0}
+  gameEndPopupDelay: 1
 --- !u!1 &6846299640355002233
 GameObject:
   m_ObjectHideFlags: 0
@@ -142,10 +143,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   menu: {fileID: 0}
   gameStateSO: {fileID: 11400000, guid: cda5ef8cc9d470749b6c3442093d2a65, type: 2}
+  eventChannelSO: {fileID: 11400000, guid: 358ddce160852ab46b0316ac9f34fd27, type: 2}
   confirmationPopup: {fileID: 0}
   gameController: {fileID: 0}
+  gameEndPopupDelay: 1
   keyboardController: {fileID: 0}
-  eventChannelSO: {fileID: 11400000, guid: 358ddce160852ab46b0316ac9f34fd27, type: 2}
 --- !u!1 &7804660082329135569
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,12 +1,10 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.InputSystem;
-using UnityEngine.UI;
 
 public class DictionarleController : BaseGameController
 {
@@ -17,10 +15,13 @@ public class DictionarleController : BaseGameController
     private GameSettingsSO gameSettingsSO;
     
     [SerializeField]
-    private DictionarleGuessController guessPrefab;
+    private DictionarleGuessLabel guessPrefab;
     
     [SerializeField]
     private TMP_InputField inputField;
+    
+    [SerializeField]
+    private DictionarleGuessesCounter guessCounter;
     
     [SerializeField]
     private Transform guessPanel;
@@ -33,11 +34,9 @@ public class DictionarleController : BaseGameController
 
     private int currentTry = 0;
 
-    private readonly List<DictionarleGuessController> guessesBeforeAnswer = new();
-    private readonly List<DictionarleGuessController> guessesAfterAnswer = new();
+    private readonly List<DictionarleGuessLabel> guessesBeforeAnswer = new();
+    private readonly List<DictionarleGuessLabel> guessesAfterAnswer = new();
     private StringComparer stringComparer;
-
-    private UnityEvent onSubmit = new();
 
     private const int MAX_TRIES = 15;
     private const string GREEN_PREFIX = "<color=#35A919>";
@@ -63,11 +62,14 @@ public class DictionarleController : BaseGameController
         stringComparer = StringComparer.Create(cultureInfo, ignoreCase: true);
 
         inputField.gameObject.SetActive(true);
+        inputField.interactable = true;
         inputField.text = string.Empty;
-        inputField.Select();
+        inputField.onSubmit.AddListener(TrySubmitWord);
+        inputField.ActivateInputField();
 
-        onSubmit.AddListener(TrySubmitWord);
         eventChannelSO.OnGameEnd.AddListener(OnGameEnd);
+
+        guessCounter.Init(MAX_TRIES);
     }
 
     public override void UnloadGame()
@@ -93,36 +95,58 @@ public class DictionarleController : BaseGameController
         Debug.Log($"wordToAnswer {wordToAnswer}");
     }
 
-    private void TrySubmitWord()
+    private void TrySubmitWord(string _)
     {
         wordGuess = inputField.text;
         if (!guesses.Any(x => x.Equals(wordGuess, StringComparison.CurrentCultureIgnoreCase))
             && !answers.Any(x => x.Equals(wordGuess, StringComparison.CurrentCultureIgnoreCase)))
         {
             ShowWarningMessage("Not in word list");
+            ReactivateInputField();
         }
         else if (wordToAnswer.Equals(wordGuess, StringComparison.CurrentCultureIgnoreCase))
         {
             HandleColors();
             ShowWarningMessage("Win!");
+            guessCounter.Win();
             eventChannelSO.OnGameEnd?.Invoke(true, wordToAnswer);
         }
         else if (currentTry < MAX_TRIES)
         {
             HandleColors();
+            guessCounter.MoveToNextNumber();
+            currentTry++;
             if (currentTry >= MAX_TRIES)
             {
                 ShowWarningMessage("Lose");
                 eventChannelSO.OnGameEnd?.Invoke(false, wordToAnswer);
+                inputField.gameObject.SetActive(false);
+            }
+            else
+            {
+                ReactivateInputField();
             }
         }
+    }
+    //todo not hide to show again
+    private void ReactivateInputField()
+    {
+        inputField.ActivateInputField();
+
+        StartCoroutine(MoveTextEnd_NextFrame());
+    }
+
+    IEnumerator MoveTextEnd_NextFrame()
+    {
+        yield return null;
+        inputField.MoveTextEnd(false);
     }
 
     private void OnGameEnd(bool _, string __)
     {
-        onSubmit.RemoveListener(TrySubmitWord);
-        inputField.ReleaseSelection();
-        inputField.gameObject.SetActive(false);
+        inputField.onSubmit.RemoveListener(TrySubmitWord);
+        inputField.DeactivateInputField();
+        inputField.interactable = false;
     }
 
     private void HandleColors()
@@ -218,16 +242,6 @@ public class DictionarleController : BaseGameController
             }
             guessText.Text = wordGuess;
             inputField.text = string.Empty;
-        }
-
-        inputField.Select();
-    }
-
-    private void Update()
-    {
-        if(Keyboard.current.enterKey.wasPressedThisFrame)
-        {
-            onSubmit?.Invoke();
         }
     }
 }

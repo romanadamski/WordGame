@@ -118,6 +118,7 @@ public class WordleController : BaseGameController
         else if (currentTry < MAX_TRIES)
         {
             HandleColors();
+            currentTry++;
             if (currentTry >= MAX_TRIES)
             {
                 ShowWarningMessage("Lose");
@@ -198,7 +199,6 @@ public class WordleController : BaseGameController
 
         guessPanelController.SetColors(currentTry, guess);
         keyboardController.SetColors(guess);
-        currentTry++;
         currentIndex = 0;
         wordGuess = new char[MAX_LETTERS];
     }

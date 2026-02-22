@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -16,8 +17,11 @@ public class ConfirmationPopup : MonoBehaviour
     
     [SerializeField]
     private Button declineButton;
+    
+    [SerializeField]
+    private GameObject confirmationPopupObject;
 
-    public void Show(string titleText, string messageText, UnityAction confirmAction, UnityAction declineAction = null)
+    public void Show(string titleText, string messageText, UnityAction confirmAction, UnityAction declineAction = null, float delay = 0f)
     {
         title.text = titleText;
         message.text = messageText;
@@ -29,12 +33,25 @@ public class ConfirmationPopup : MonoBehaviour
         confirmButton.onClick.AddListener(Hide);
         declineButton.onClick.AddListener(Hide);
 
-        gameObject.SetActive(true);
+        if (delay <= 0)
+        {
+            confirmationPopupObject.SetActive(true);
+        }
+        else
+        {
+            StartCoroutine(Show(delay));
+        }
+    }
+
+    private IEnumerator Show(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        confirmationPopupObject.SetActive(true);
     }
 
     public void Hide()
     {
-        gameObject.SetActive(false);
+        confirmationPopupObject.SetActive(false);
 
         title.text = string.Empty;
         message.text = string.Empty;
