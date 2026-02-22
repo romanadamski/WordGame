@@ -3839,7 +3839,7 @@ GameObject:
   - component: {fileID: 439550649555732832}
   - component: {fileID: 1169054690632009878}
   m_Layer: 5
-  m_Name: GuessPanel
+  m_Name: WordleGuessPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3905,7 +3905,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4049069581337775721}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e23582ed1ed28c4dbcebedca8538d26, type: 3}
+  m_Script: {fileID: 11500000, guid: c46eda2dd901e1b4d8558e241919530a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   eventChannelSO: {fileID: 11400000, guid: 358ddce160852ab46b0316ac9f34fd27, type: 2}

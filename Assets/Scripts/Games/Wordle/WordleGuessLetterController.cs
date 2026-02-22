@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GuessLetterController : MonoBehaviour
+public class WordleGuessLetterController : MonoBehaviour
 {
     [field: SerializeField]
     public TextMeshProUGUI Letter {  get; private set; }

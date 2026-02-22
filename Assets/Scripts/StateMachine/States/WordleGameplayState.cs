@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class WordleGameplayState : BaseGameplayState
 {
+    [SerializeField]
+    private KeyboardController keyboardController;
+
     protected override void OnEnter()
     {
         menu.Show(new GameplayMenuDM
@@ -11,12 +14,14 @@ public class WordleGameplayState : BaseGameplayState
             OnCloseClick = OnCloseClick
         });
 
+        keyboardController.ShowKeyboard(gameStateSO.CurrentLanguageConfig.Language);
+
         base.OnEnter();
     }
 
     protected override void OnExit()
     {
-        eventChannelSO.OnGameplayClear?.Invoke();
+        keyboardController.HideKeyboard();
 
         base.OnExit();
     }

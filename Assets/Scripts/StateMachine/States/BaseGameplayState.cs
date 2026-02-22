@@ -9,31 +9,25 @@ public class BaseGameplayState : StateWithMenu<GameplayMenu>
     protected EventChannelSO eventChannelSO;
 
     [SerializeField]
-    private ConfirmationPopup confirmationPopup;
+    protected ConfirmationPopup confirmationPopup;
     
     [SerializeField]
     private BaseGameController gameController;
     
-    [SerializeField]
-    private KeyboardController keyboardController;
-
     protected override void OnEnter()
     {
         base.OnEnter();
 
-        keyboardController.ShowKeyboard(gameStateSO.CurrentLanguageConfig.Language);
-        gameController.LoadGame();
-
         eventChannelSO.OnGameEnd.AddListener(OnGameEnd);
+        gameController.LoadGame();
     }
 
     protected override void OnExit()
     {
         base.OnExit();
-
-        keyboardController.HideKeyboard();
-        gameController.UnloadGame();
         eventChannelSO.OnGameEnd.RemoveListener(OnGameEnd);
+        eventChannelSO.OnGameplayClear?.Invoke();
+        gameController.UnloadGame();
     }
 
     private void OnGameEnd(bool isWin, string answer)

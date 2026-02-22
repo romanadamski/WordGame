@@ -1,16 +1,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GuessPanelController : MonoBehaviour
+public class WordleGuessPanelController : MonoBehaviour
 {
     [SerializeField]
     private EventChannelSO eventChannelSO;
 
-    private GuessLineController[] lines;
+    private WordleGuessLineController[] lines;
 
     private void Awake()
     {
-        lines = GetComponentsInChildren<GuessLineController>();
+        lines = GetComponentsInChildren<WordleGuessLineController>();
         eventChannelSO.OnGameplayClear.AddListener(Clear);
     }
 

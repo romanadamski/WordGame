@@ -1,14 +1,14 @@
 using System.Linq;
 using UnityEngine;
 
-public class GuessLineController : MonoBehaviour
+public class WordleGuessLineController : MonoBehaviour
 {
-    private GuessLetterController[] letters;
+    private WordleGuessLetterController[] letters;
     private Color defaultColor;
 
     private void Awake()
     {
-        letters = GetComponentsInChildren<GuessLetterController>();
+        letters = GetComponentsInChildren<WordleGuessLetterController>();
         defaultColor = letters.First().Background.color;
     }
     

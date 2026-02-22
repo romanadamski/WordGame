@@ -28,7 +28,7 @@ public class WordleController : BaseGameController
     private GameSettingsSO gameSettingsSO;
     
     [SerializeField]
-    private GuessPanelController guessPanelController;
+    private WordleGuessPanelController guessPanelController;
     
     [SerializeField]
     private KeyboardController keyboardController;
