@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Diagnostics.Tracing;
+using UnityEngine;
 
 public class BaseGameplayState : StateWithMenu<GameplayMenu>
 {
@@ -32,6 +34,7 @@ public class BaseGameplayState : StateWithMenu<GameplayMenu>
         base.OnEnter();
 
         eventChannelSO.OnGameEnd.AddListener(OnGameEnd);
+        eventChannelSO.OnGameUnload.AddListener(OnGameUnload);
 
         gamesCount = PlayerPrefs.GetInt(GamesCounterKey, 0);
         var wins = PlayerPrefs.GetInt(WinsKey, 0);
@@ -45,11 +48,16 @@ public class BaseGameplayState : StateWithMenu<GameplayMenu>
     protected override void OnExit()
     {
         base.OnExit();
-        gamesCount++;
-        PlayerPrefs.SetInt(GamesCounterKey, gamesCount);
         eventChannelSO.OnGameEnd.RemoveListener(OnGameEnd);
+        eventChannelSO.OnGameUnload.RemoveListener(OnGameUnload);
         eventChannelSO.OnGameplayClear?.Invoke();
         gameController.UnloadGame();
+    }
+
+    private void OnGameUnload()
+    {
+        gamesCount++;
+        PlayerPrefs.SetInt(GamesCounterKey, gamesCount);
     }
 
     private void OnGameEnd(bool isWin, string answer)
@@ -64,6 +72,8 @@ public class BaseGameplayState : StateWithMenu<GameplayMenu>
         }
         var title = isWin ? "You've won!" : "You've lost!";
         var message = $"The word was: {answer.ToUpper()}\nPlay again?";
+        eventChannelSO.OnGameUnload?.Invoke();
+        Debug.Log("eventChannelSO.OnGameUnload OnGameEnd");
         confirmationPopup.Show(title, message, ReinitState, GoToMainMenu, gameEndPopupDelay);
     }
 
@@ -85,7 +95,8 @@ public class BaseGameplayState : StateWithMenu<GameplayMenu>
     private void LeaveGame()
     {
         PlayerPrefs.SetInt(CurrentStreakKey, 0);
-
+        eventChannelSO.OnGameUnload?.Invoke();
+        Debug.Log("eventChannelSO.OnGameUnload LeaveGame");
         GoToMainMenu();
     }
 

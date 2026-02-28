@@ -13,4 +13,8 @@ public class EventChannelSO : ScriptableObject
 
     [NonSerialized]
     public UnityEvent<bool, string> OnGameEnd = new();
+
+    //todo state to unload - win/lose(gameend), go to mm
+    [NonSerialized]
+    public UnityEvent OnGameUnload = new();
 }
