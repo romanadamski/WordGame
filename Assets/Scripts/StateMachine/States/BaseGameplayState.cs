@@ -73,7 +73,6 @@ public class BaseGameplayState : StateWithMenu<GameplayMenu>
         var title = isWin ? "You've won!" : "You've lost!";
         var message = $"The word was: {answer.ToUpper()}\nPlay again?";
         eventChannelSO.OnGameUnload?.Invoke();
-        Debug.Log("eventChannelSO.OnGameUnload OnGameEnd");
         confirmationPopup.Show(title, message, ReinitState, GoToMainMenu, gameEndPopupDelay);
     }
 
@@ -96,7 +95,6 @@ public class BaseGameplayState : StateWithMenu<GameplayMenu>
     {
         PlayerPrefs.SetInt(CurrentStreakKey, 0);
         eventChannelSO.OnGameUnload?.Invoke();
-        Debug.Log("eventChannelSO.OnGameUnload LeaveGame");
         GoToMainMenu();
     }
 

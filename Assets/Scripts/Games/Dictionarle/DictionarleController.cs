@@ -68,6 +68,10 @@ public class DictionarleController : BaseGameController
         inputField.interactable = true;
         inputField.text = string.Empty;
         inputField.onSubmit.AddListener(TrySubmitWord);
+        inputField.onValidateInput += (text, charIndex, addedChar) =>
+        {
+            return char.IsLetter(addedChar) ? addedChar : '\0';
+        };
         inputField.ActivateInputField();
 
         eventChannelSO.OnGameEnd.AddListener(OnGameEnd);
@@ -90,6 +94,7 @@ public class DictionarleController : BaseGameController
         guessesBeforeAnswer.Clear();
         guessesAfterAnswer.Clear();
         eventChannelSO.OnGameEnd.RemoveListener(OnGameEnd);
+        inputField.onSubmit.RemoveListener(TrySubmitWord);
     }
 
     private void GetWordToGuess()
@@ -149,7 +154,6 @@ public class DictionarleController : BaseGameController
 
     private void OnGameEnd(bool _, string __)
     {
-        inputField.onSubmit.RemoveListener(TrySubmitWord);
         inputField.DeactivateInputField();
         inputField.interactable = false;
     }
