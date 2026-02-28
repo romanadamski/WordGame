@@ -45,6 +45,8 @@ public class BaseGameplayState : StateWithMenu<GameplayMenu>
     protected override void OnExit()
     {
         base.OnExit();
+        gamesCount++;
+        PlayerPrefs.SetInt(GamesCounterKey, gamesCount);
         eventChannelSO.OnGameEnd.RemoveListener(OnGameEnd);
         eventChannelSO.OnGameplayClear?.Invoke();
         gameController.UnloadGame();
@@ -53,8 +55,6 @@ public class BaseGameplayState : StateWithMenu<GameplayMenu>
     private void OnGameEnd(bool isWin, string answer)
     {
         PlayerPrefs.SetInt(CurrentStreakKey, isWin ? currentStreak + 1 : 0);
-        gamesCount++;
-        PlayerPrefs.SetInt(GamesCounterKey, gamesCount);
 
         if (isWin)
         {
