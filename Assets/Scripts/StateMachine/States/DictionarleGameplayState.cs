@@ -1,6 +1,5 @@
 public class DictionarleGameplayState : BaseGameplayState
 {
-    protected override string CurrentStreakKey => "DictionarleGames";
     protected override string GamesCounterKey => "DictionarleCurrentStreak";
     protected override string WinsKey => "DictionarleWins";
 
