@@ -5,6 +5,10 @@ public class WordleGameplayState : BaseGameplayState
     [SerializeField]
     private KeyboardController keyboardController;
 
+    protected override string CurrentStreakKey => "WordleCurrentStreak";
+    protected override string GamesCounterKey => "WordleGames";
+    protected override string WinsKey => "WordleWins";
+
     protected override void OnEnter()
     {
         menu.Show(new GameplayMenuDM
