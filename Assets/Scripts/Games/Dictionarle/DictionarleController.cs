@@ -200,12 +200,13 @@ public class DictionarleController : BaseGameController
                 }
                 else
                 {
-                    var sortedGuesses = guessesBeforeAnswer.OrderBy(x => x.Text, stringComparer).ToList();
+                    var sortedGuesses = guessesBeforeAnswer.OrderBy(x => x.transform.GetSiblingIndex()).ToList();
                     var inserted = false;
                     for (i = 0; i < sortedGuesses.Count; i++)
                     {
                         if (stringComparer.Compare(wordGuess, sortedGuesses[i].Text) < 0)
                         {
+                            var siblingIndex = sortedGuesses[i].transform.GetSiblingIndex();
                             guessText.transform.SetSiblingIndex(sortedGuesses[i].transform.GetSiblingIndex());
                             inserted = true;
                             break;
@@ -213,7 +214,7 @@ public class DictionarleController : BaseGameController
                     }
                     if (!inserted)
                     {
-                        guessText.transform.SetSiblingIndex(inputField.transform.GetSiblingIndex());
+                        guessText.transform.SetSiblingIndex(i);
                     }
                 }
                 guessesBeforeAnswer.Add(guessText);
@@ -227,7 +228,7 @@ public class DictionarleController : BaseGameController
                 }
                 else
                 {
-                    var sortedGuesses = guessesAfterAnswer.OrderBy(x => x.Text, stringComparer).ToList();
+                    var sortedGuesses = guessesAfterAnswer.OrderBy(x => x.transform.GetSiblingIndex()).ToList();
                     var inserted = false;
                     for (i = 0; i < sortedGuesses.Count; i++)
                     {
@@ -240,12 +241,13 @@ public class DictionarleController : BaseGameController
                     }
                     if (!inserted)
                     {
-                        guessText.transform.SetSiblingIndex(i + 1);
+                        guessText.transform.SetSiblingIndex(i);
                     }
                 }
                 guessesAfterAnswer.Add(guessText);
             }
             guessText.Text = wordGuess;
+            guessText.name = wordGuess;
             inputField.text = string.Empty;
         }
     }

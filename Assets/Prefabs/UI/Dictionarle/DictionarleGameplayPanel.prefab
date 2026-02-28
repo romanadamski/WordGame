@@ -47,6 +47,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7001554028400538039}
   - component: {fileID: 3061095489689666375}
+  - component: {fileID: 5592807479495334776}
   m_Layer: 5
   m_Name: GuessedBefore
   m_TagString: Untagged
@@ -72,7 +73,7 @@ RectTransform:
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &3061095489689666375
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -99,6 +100,20 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &5592807479495334776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1464661128682751054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalFit: 0
+  m_VerticalFit: 2
 --- !u!1 &1607131855360391589
 GameObject:
   m_ObjectHideFlags: 0
@@ -147,6 +162,8 @@ GameObject:
   - component: {fileID: 5404429672838690193}
   - component: {fileID: 7123415670417069289}
   - component: {fileID: 4380003258373188086}
+  - component: {fileID: 1221671373205390778}
+  - component: {fileID: 7026228096208212206}
   m_Layer: 0
   m_Name: GuessesCounter
   m_TagString: Untagged
@@ -168,11 +185,11 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 6532569337941101384}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 50.00003, y: 0}
   m_SizeDelta: {x: 100, y: 0}
-  m_Pivot: {x: 0, y: 0.5}
+  m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &7123415670417069289
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -193,7 +210,7 @@ MonoBehaviour:
   m_ChildAlignment: 1
   m_Spacing: 10
   m_ChildForceExpandWidth: 1
-  m_ChildForceExpandHeight: 1
+  m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 0
   m_ChildControlHeight: 0
   m_ChildScaleWidth: 0
@@ -216,6 +233,40 @@ MonoBehaviour:
   activeGuessNumber: {r: 0.4, g: 0.4, b: 0.4, a: 1}
   missedGuessNumber: {r: 0.6117647, g: 0.48235294, b: 0.12941177, a: 1}
   correctGuessNumber: {r: 0.19081523, g: 0.6037736, b: 0.20146118, a: 1}
+--- !u!114 &1221671373205390778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2720320158480312768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalFit: 0
+  m_VerticalFit: 2
+--- !u!114 &7026228096208212206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2720320158480312768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreLayout: 0
+  m_MinWidth: -1
+  m_MinHeight: 600
+  m_PreferredWidth: -1
+  m_PreferredHeight: -1
+  m_FlexibleWidth: -1
+  m_FlexibleHeight: -1
+  m_LayoutPriority: 1
 --- !u!1 &3832708633151573566
 GameObject:
   m_ObjectHideFlags: 0
@@ -1306,8 +1357,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 7149940402144654067}
   - {fileID: 1206488916811655591}
+  - {fileID: 7149940402144654067}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1417,7 +1468,7 @@ RectTransform:
   m_AnchorMax: {x: 1, y: 0.45}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &818093905950991835
 MonoBehaviour:
   m_ObjectHideFlags: 0

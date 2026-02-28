@@ -31,12 +31,14 @@ public class DictionarleGuessesCounter : MonoBehaviour
             var guessNumber = Instantiate(guessNumberPrefab, transform);
             guessNumber.Background.color = inactiveGuessNumber;
             guessNumber.Label.gameObject.SetActive(false);
+            guessNumber.gameObject.SetActive(false);
             guessNumbers.Add(guessNumber);
         }
         currentIndex = 0;
         guessNumbers[currentIndex].Background.color = activeGuessNumber;
         guessNumbers[currentIndex].Label.gameObject.SetActive(true);
         guessNumbers[currentIndex].Label.text = $"{currentIndex + 1}";
+        guessNumbers[currentIndex].gameObject.SetActive(true);
     }
 
     public void Win()
@@ -53,6 +55,7 @@ public class DictionarleGuessesCounter : MonoBehaviour
             guessNumbers[currentIndex].Background.color = activeGuessNumber;
             guessNumbers[currentIndex].Label.gameObject.SetActive(true);
             guessNumbers[currentIndex].Label.text = $"{currentIndex + 1}";
+            guessNumbers[currentIndex].gameObject.SetActive(true);
         }
     }
 }
