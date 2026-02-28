@@ -12,7 +12,7 @@ public class GamesCounterUI : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI winRatioLabel;
 
-    private const string GAMES_COUNTER = "GAME: ";
+    private const string GAMES_COUNTER = "GAMES: ";
     private const string CURRENT_STREAK = "STREAK: ";
     private const string WINS = "WIN RATIO: ";
 

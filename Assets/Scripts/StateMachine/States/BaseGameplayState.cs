@@ -37,9 +37,6 @@ public class BaseGameplayState : StateWithMenu<GameplayMenu>
         var wins = PlayerPrefs.GetInt(WinsKey, 0);
         var winRatio = gamesCount > 0 ? (wins / (float)gamesCount) * 100f : 0;
 
-        gamesCount++;
-        PlayerPrefs.SetInt(GamesCounterKey, gamesCount);
-
         currentStreak = PlayerPrefs.GetInt(CurrentStreakKey, 0);
         gamesCounter.InitCounter(gamesCount, currentStreak, winRatio);
         gameController.LoadGame();
@@ -56,6 +53,9 @@ public class BaseGameplayState : StateWithMenu<GameplayMenu>
     private void OnGameEnd(bool isWin, string answer)
     {
         PlayerPrefs.SetInt(CurrentStreakKey, isWin ? currentStreak + 1 : 0);
+        gamesCount++;
+        PlayerPrefs.SetInt(GamesCounterKey, gamesCount);
+
         if (isWin)
         {
             var wins = PlayerPrefs.GetInt(WinsKey, 0);
