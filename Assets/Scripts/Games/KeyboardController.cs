@@ -35,8 +35,14 @@ public class KeyboardController : MonoBehaviour
     [SerializeField]
     private GameObject polishCharacters;
     
-    [SerializeField]
+    [SerializeField, Header("Key highlight")]
     private TextMeshProUGUI keyHighlight;
+    
+    [SerializeField]
+    private float keyHighlightPosYOffset = 150f;
+    
+    [SerializeField]
+    private float keyHighlightDuration = 0.15f;
 
     private KeyController[] keyControllers;
     private Coroutine hightightCoroutine;
@@ -59,7 +65,7 @@ public class KeyboardController : MonoBehaviour
     {
         keyHighlight.text = key.GetComponentInChildren<TextMeshProUGUI>().text;
 
-        keyHighlight.transform.parent.position = key.transform.position + Vector3.up * 110f;
+        keyHighlight.transform.parent.position = key.transform.position + Vector3.up * keyHighlightPosYOffset;
         (keyHighlight.transform.parent as RectTransform).sizeDelta = (key.transform as RectTransform).sizeDelta;
 
         if (hightightCoroutine != null)
@@ -72,7 +78,7 @@ public class KeyboardController : MonoBehaviour
     private IEnumerator ShowKeyHighlightCoroutine()
     {
         keyHighlight.transform.parent.gameObject.SetActive(true);
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(keyHighlightDuration);
         keyHighlight.transform.parent.gameObject.SetActive(false);
     }
 
