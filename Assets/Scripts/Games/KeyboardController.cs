@@ -66,7 +66,7 @@ public class KeyboardController : MonoBehaviour
         keyHighlight.text = key.GetComponentInChildren<TextMeshProUGUI>().text;
 
         keyHighlight.transform.parent.position = key.transform.position + Vector3.up * keyHighlightPosYOffset;
-        (keyHighlight.transform.parent as RectTransform).sizeDelta = (key.transform as RectTransform).sizeDelta;
+        (keyHighlight.transform.parent as RectTransform).sizeDelta = (key.transform as RectTransform).sizeDelta * 1.2f;
 
         if (hightightCoroutine != null)
         {
