@@ -18,7 +18,7 @@ public class DictionarleController : BaseGameController
     private DictionarleGuessLabel guessPrefab;
     
     [SerializeField]
-    private TMP_InputField inputField;
+    private PersistentTMPInputField inputField;
     
     [SerializeField]
     private DictionarleGuessesCounter guessCounter;
@@ -142,7 +142,7 @@ public class DictionarleController : BaseGameController
         inputField.ActivateInputField();
         inputField.Select();
 
-        StartCoroutine(MoveTextEnd_NextFrame());
+        //StartCoroutine(MoveTextEnd_NextFrame());
     }
 
     IEnumerator MoveTextEnd_NextFrame()

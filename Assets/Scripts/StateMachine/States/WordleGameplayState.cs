@@ -5,6 +5,9 @@ public class WordleGameplayState : BaseGameplayState
     [SerializeField]
     private KeyboardController keyboardController;
 
+    [SerializeField]
+    private GameStateSO gameStateSO;
+
     protected override string GamesCounterKey => "WordleGames";
     protected override string WinsKey => "WordleWins";
 

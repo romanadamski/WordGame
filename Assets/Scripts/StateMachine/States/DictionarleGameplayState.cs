@@ -1,5 +1,10 @@
+using UnityEngine;
+
 public class DictionarleGameplayState : BaseGameplayState
 {
+    [SerializeField]
+    private GameStateSO gameStateSO;
+
     protected override string GamesCounterKey => "DictionarleCurrentStreak";
     protected override string WinsKey => "DictionarleWins";
 

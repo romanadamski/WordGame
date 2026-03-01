@@ -3,9 +3,6 @@
 public class BaseGameplayState : StateWithMenu<GameplayMenu>
 {
     [SerializeField]
-    protected GameStateSO gameStateSO;
-    
-    [SerializeField]
     protected EventChannelSO eventChannelSO;
 
     [SerializeField]
@@ -30,7 +27,6 @@ public class BaseGameplayState : StateWithMenu<GameplayMenu>
         base.OnEnter();
 
         eventChannelSO.OnGameEnd.AddListener(OnGameEnd);
-        eventChannelSO.OnGameUnload.AddListener(OnGameUnload);
 
         gamesCount = PlayerPrefs.GetInt(GamesCounterKey, 0);
         var wins = PlayerPrefs.GetInt(WinsKey, 0);
@@ -44,7 +40,6 @@ public class BaseGameplayState : StateWithMenu<GameplayMenu>
     {
         base.OnExit();
         eventChannelSO.OnGameEnd.RemoveListener(OnGameEnd);
-        eventChannelSO.OnGameUnload.RemoveListener(OnGameUnload);
         eventChannelSO.OnGameplayClear?.Invoke();
         gameController.UnloadGame();
     }
@@ -65,7 +60,7 @@ public class BaseGameplayState : StateWithMenu<GameplayMenu>
         }
         var title = isWin ? "You've won!" : "You've lost!";
         var message = $"The word was: {answer.ToUpper()}\nPlay again?";
-        eventChannelSO.OnGameUnload?.Invoke();
+        OnGameUnload();
         confirmationPopup.Show(title, message, ReinitState, GoToMainMenu, gameEndPopupDelay);
     }
 
@@ -81,7 +76,7 @@ public class BaseGameplayState : StateWithMenu<GameplayMenu>
 
     private void LeaveGame()
     {
-        eventChannelSO.OnGameUnload?.Invoke();
+        OnGameUnload();
         GoToMainMenu();
     }
 
