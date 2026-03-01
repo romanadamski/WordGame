@@ -7,6 +7,9 @@ public class EventChannelSO : ScriptableObject
 {
     [NonSerialized]
     public UnityEvent<CustomKeyCode> OnKeyClick = new();
+    
+    [NonSerialized]
+    public UnityEvent<KeyController> OnKeyDown = new();
 
     [NonSerialized]
     public UnityEvent OnGameplayClear = new();

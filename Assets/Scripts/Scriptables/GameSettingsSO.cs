@@ -40,5 +40,4 @@ public class GameSettingsSO : ScriptableObject
 
     [field: SerializeField]
     public Color WrongColor { get; private set; }
-
 }

@@ -1,8 +1,9 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Button))]
-public class KeyController : MonoBehaviour
+public class KeyController : MonoBehaviour, IPointerDownHandler
 {
     [SerializeField]
     private EventChannelSO eventChannelSO;
@@ -42,5 +43,10 @@ public class KeyController : MonoBehaviour
     {
         background.color = defaultColor;
         guessType = GuessType.None;
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        eventChannelSO.OnKeyDown?.Invoke(this);
     }
 }

@@ -1,6 +1,9 @@
+using Solo.MOST_IN_ONE;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 
 public enum PolishKeyCode
@@ -27,17 +30,50 @@ public class CustomKeyCode
 public class KeyboardController : MonoBehaviour
 {
     [SerializeField]
-    private GameObject polishCharacters;
-
-    [SerializeField]
     private EventChannelSO eventChannelSO;
 
+    [SerializeField]
+    private GameObject polishCharacters;
+    
+    [SerializeField]
+    private TextMeshProUGUI keyHighlight;
+
     private KeyController[] keyControllers;
+    private Coroutine hightightCoroutine;
 
     private void Awake()
     {
         keyControllers = GetComponentsInChildren<KeyController>();
+        eventChannelSO.OnKeyDown.AddListener(OnKeyDown);
         eventChannelSO.OnGameplayClear.AddListener(Clear);
+        keyHighlight.transform.parent.gameObject.SetActive(false);
+    }
+
+    private void OnKeyDown(KeyController key)
+    {
+        ShowKeyHighlight(key);
+        MOST_HapticFeedback.Generate(MOST_HapticFeedback.HapticTypes.MediumImpact);
+    }
+
+    private void ShowKeyHighlight(KeyController key)
+    {
+        keyHighlight.text = key.GetComponentInChildren<TextMeshProUGUI>().text;
+
+        keyHighlight.transform.parent.position = key.transform.position + Vector3.up * 110f;
+        (keyHighlight.transform.parent as RectTransform).sizeDelta = (key.transform as RectTransform).sizeDelta;
+
+        if (hightightCoroutine != null)
+        {
+            StopCoroutine(hightightCoroutine);
+        }
+        hightightCoroutine = StartCoroutine(ShowKeyHighlightCoroutine());
+    }
+
+    private IEnumerator ShowKeyHighlightCoroutine()
+    {
+        keyHighlight.transform.parent.gameObject.SetActive(true);
+        yield return new WaitForSeconds(0.2f);
+        keyHighlight.transform.parent.gameObject.SetActive(false);
     }
 
     public void ShowKeyboard(LanguageType language)
@@ -68,7 +104,6 @@ public class KeyboardController : MonoBehaviour
             key.Clear();
         }
     }
-
 
     public static char ParseToPolish(PolishKeyCode polishKeyCode)
     {

@@ -73,26 +73,26 @@ public class WordleController : BaseGameController
         Debug.Log($"wordToAnswer {wordToAnswer}");
     }
 
-    private void OnKeyClick(CustomKeyCode key)
+    private void OnKeyClick(CustomKeyCode keyCode)
     {
-        if (key.PolishKeyCode != PolishKeyCode.None)
+        if (keyCode.PolishKeyCode != PolishKeyCode.None)
         {
-            var polishChar = KeyboardController.ParseToPolish(key.PolishKeyCode);
+            var polishChar = KeyboardController.ParseToPolish(keyCode.PolishKeyCode);
             AddCharacter(polishChar);
         }
         else
         {
-            if (key.KeyCode == KeyCode.Return)
+            if (keyCode.KeyCode == KeyCode.Return)
             {
                 TrySubmitWord();
             }
-            else if (key.KeyCode == KeyCode.Backspace)
+            else if (keyCode.KeyCode == KeyCode.Backspace)
             {
                 RemoveCharacter();
             }
             else
             {
-                AddCharacter((char)key.KeyCode);
+                AddCharacter((char)keyCode.KeyCode);
             }
         }
     }
